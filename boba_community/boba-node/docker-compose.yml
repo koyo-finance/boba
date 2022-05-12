@@ -1,9 +1,9 @@
 
 x-l1_rpc_dtl: &l1_rpc_dtl
-  DATA_TRANSPORT_LAYER__L1_RPC_ENDPOINT: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
+  DATA_TRANSPORT_LAYER__L1_RPC_ENDPOINT: 'https://eth-mainnet.alchemyapi.io/v2/YOUR_ALCHEMY_KEY'
 
 x-l1_rpc_geth: &l1_rpc_geth
-  ETH1_HTTP: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
+  ETH1_HTTP: 'https://eth-mainnet.alchemyapi.io/v2/YOUR_ALCHEMY_KEY'
 
 version: "3.9"
 
@@ -46,8 +46,8 @@ services:
     entrypoint: sh ./geth.sh
     env_file:
       - ../../ops/envs/geth.env
-    #volumes:
-    #  - ./<YOUR PERSISTED STORAGE>:/root/.ethereum/
+    volumes:
+      - ./opt/nodes/boba/mainnet/geth/:/root/.ethereum/
     environment:
       << : *l1_rpc_geth
       ROLLUP_TIMESTAMP_REFRESH: 5s
