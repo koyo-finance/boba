@@ -9,7 +9,7 @@ version: "3.9"
 
 services:
   dtl:
-    container_name: dtl
+    container_name: boba_dtl
     image: bobanetwork/data-transport-layer:release
     env_file:
       -  ../../ops/envs/dtl.env
@@ -37,7 +37,7 @@ services:
       - ${REGISTRY_PORT:-8080}:8081
 
   replica:
-    container_name: replica
+    container_name: boba_replica
     depends_on:
       - dtl
     image: bobanetwork/l2geth:release
