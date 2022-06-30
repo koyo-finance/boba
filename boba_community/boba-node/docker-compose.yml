@@ -47,7 +47,7 @@ services:
     env_file:
       - ../../ops/envs/geth.env
     volumes:
-      - /opt/nodes/boba/mainnet/geth/:/root/.ethereum/
+      - /opt/nodes/boba/data/geth:/root/.ethereum/
     environment:
       << : *l1_rpc_geth
       ROLLUP_TIMESTAMP_REFRESH: 5s
