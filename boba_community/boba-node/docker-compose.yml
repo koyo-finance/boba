@@ -10,7 +10,9 @@ version: "3.9"
 services:
   dtl:
     container_name: boba_dtl
-    build: ../../ops/docker/Dockerfile.data-transport-layer
+    build:
+      context: data-transport-layer
+      dockerfile: ../../ops/docker/Dockerfile.data-transport-layer
     env_file:
       -  ../../ops/envs/dtl.env
     environment:
@@ -40,7 +42,9 @@ services:
     container_name: boba_replica
     depends_on:
       - dtl
-    build: ../../ops/docker/Dockerfile.geth
+    build:
+      context: l2geth
+      dockerfile: ../../ops/docker/Dockerfile.geth
     deploy:
       replicas: 1
     entrypoint: sh ./geth.sh
