@@ -1,8 +1,8 @@
 version: "3.9"
 
 services:
-  dtl:
-    container_name: boba_dtl
+  boba_dtl:
+    container_name: rpc-boba-dtl
     build:
       context: ..
       dockerfile: ./ops/docker/Dockerfile.data-transport-layer
@@ -31,10 +31,10 @@ services:
       - "127.0.0.1:${DTL_PORT:-32878}:7878"
       - "127.0.0.1:${REGISTRY_PORT:-32080}:8081"
 
-  replica:
-    container_name: boba_replica
+  boba_replica:
+    container_name: rpc-boba
     depends_on:
-      - dtl
+      - boba_dtl
     build:
       context: ..
       dockerfile: ./ops/docker/Dockerfile.geth
@@ -48,8 +48,8 @@ services:
     environment:
       ETH1_HTTP: 'https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}'
       ROLLUP_TIMESTAMP_REFRESH: 5s
-      ROLLUP_STATE_DUMP_PATH: http://dtl:8081/state-dump.latest.json
-      ROLLUP_CLIENT_HTTP: http://dtl:7878
+      ROLLUP_STATE_DUMP_PATH: http://boba_dtl:8081/state-dump.latest.json
+      ROLLUP_CLIENT_HTTP: http://boba_dtl:7878
       ROLLUP_BACKEND: 'l2'
       ROLLUP_VERIFIER_ENABLE: 'true'
       RETRIES: 60
