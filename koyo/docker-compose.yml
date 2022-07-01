@@ -12,7 +12,7 @@ services:
     container_name: boba_dtl
     build:
       context: ..
-      dockerfile: ../ops/docker/Dockerfile.data-transport-layer
+      dockerfile: ./ops/docker/Dockerfile.data-transport-layer
     env_file:
       -  ./envs/dtl.env
     environment:
@@ -44,7 +44,7 @@ services:
       - dtl
     build:
       context: ..
-      dockerfile: ../ops/docker/Dockerfile.geth
+      dockerfile: ./ops/docker/Dockerfile.geth
     deploy:
       replicas: 1
     entrypoint: sh ./geth.sh
